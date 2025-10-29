@@ -1,0 +1,27 @@
+# Core RAG and LLM libraries
+langchain>=0.2.0
+openai>=1.2.0
+tiktoken>=0.5.0
+
+# Embeddings and vector store
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.2
+
+# Transcript fetching
+youtube-transcript-api>=0.6.1
+
+# Web framework / UI
+streamlit>=1.35.0
+
+# Optional but useful for structured pipelines
+pydantic>=2.0
+numpy>=1.24.0
+
+# For making API calls and handling responses
+requests>=2.31.0
+
+# If you want to add logging or better error handling
+loguru>=0.7.2
+
+# Optional: For local .env configuration
+python-dotenv>=1.0.1
