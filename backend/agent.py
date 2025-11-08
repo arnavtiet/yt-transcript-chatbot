@@ -13,9 +13,10 @@ def build_qa_chain(vectorstore):
     Create a QA chain using the modern LangChain approach with LCEL.
     """    # Initialize the LLM
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash-exp",
+        model="gemini-2.5-flash",
         google_api_key=GOOGLE_API_KEY,
-        temperature=0.3
+        temperature=0.3,
+        convert_system_message_to_human=False  # disables internal embed-based memory
     )
     
     # Create retriever

@@ -1,12 +1,11 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.prompts import PromptTemplate
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 def chunk_text(text: str):
     """
@@ -17,8 +16,12 @@ def chunk_text(text: str):
 
 def build_vectorstore(chunks):
     """
-    Create FAISS vector store using Gemini embeddings.
+    Create FAISS vector store using local HuggingFace embeddings.
     """
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=GOOGLE_API_KEY)
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2",
+        model_kwargs={'device': 'cpu'},
+        encode_kwargs={'normalize_embeddings': True}
+    )
     vectorstore = FAISS.from_texts(chunks, embeddings)
     return vectorstore
